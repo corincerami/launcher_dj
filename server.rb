@@ -1,17 +1,44 @@
 require 'sinatra'
 require 'pg'
+require 'pry'
 
-def sql_magic_goes_here
+def db_connection
+  begin
+    connection = PG.connect(dbname: 'launcher_dj')
+    yield(connection)
+  ensure
+    connection.close
+  end
+end
+
+def song_list
   []
 end
 
-def add_song_to_db(title, artist, url, username)
+def complete?(array)
+  array.each do |item|
+    return false if item.nil? || item.empty?
+  end
+  true
 end
 
-songs_list = sql_magic_goes_here
+def sanitize(song_name, artist, user_name, url)
+  [song_name, artist, user_name, url]
+end
+
+def add_song_to_db(song_name, artist, user_name, url)
+  return 'Please fill out all fields' unless complete?([song_name, artist, user_name, url])
+  song_data = sanitize(song_name, artist, user_name, url)
+  query = "INSERT INTO songs (song_name, artist, user_name, song_url, created_at)
+    VALUES ('#{song_data[0]}', '#{song_data[1]}', '#{song_data[2]}', '#{song_data[3]}', now());"
+  db_connection do |conn|
+    conn.exec(query)
+  end
+  'Submission accepted'
+end
 
 get '/launcher_dj' do
-  @songs_list = songs_list
+  @song_list = song_list
   erb :index
 end
 
