@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'pg'
 
 def sql_magic_goes_here
   []
