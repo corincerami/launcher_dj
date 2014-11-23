@@ -44,19 +44,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Launcher Rocks</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="#">Sign in with GitHub</a>
                     </li>
                 </ul>
             </div>
@@ -66,7 +60,7 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container col-lg-offset-1 col-lg-10 text-center">
 
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -75,27 +69,49 @@
         </div>
       </div>
 
-      <form role="form" class="form-inline">
+      <form role="form" class="form-inline col-lg-8 col-lg-offset-2">
         <div class="row">
-          <div class="form-group col-lg-8">
-            <input name="username" type="text" class="form-control" id="" placeholder="User Name">
-            <input type="text" class="form-control" id="" placeholder="Song Name">
-            <input type="text" class="form-control" id="" placeholder="Artist">
+          <div class="form-group col-lg-12">
+            <input name="username" type="text" class="form-control" size="30" placeholder="User Name">
+            <input name="title" type="text" class="form-control" size="30" placeholder="Song Name">
+            <input name="artist" type="text" class="form-control" size="30" placeholder="Artist">
           </div>
         </div>
 
         <div class="row">
-          <div class="form-group ">
-            <label for="url">YouTube Link</label>
-            <input type="text" class="form-control" id="" placeholder="YouTube Link">
+          <div class="form-group col-lg-12">
+            <br>
+            <input name="url" type="text" class="form-control" size="112" placeholder="YouTube Link">
           </div>
         </div>
 
-        <div class="row text-center">
+        <div class="row text-center col-lg-12">
+          <br>
           <button type="submit" class="btn btn-default">Submit</button>
         </div>
       </form>
       <!-- /.row -->
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <br>
+          <table class="table table-striped">
+            <tr class="info">
+              <td>Song ID</td>
+              <td>Song Title</td>
+              <td>Artist</td>
+              <td>Posted By</td>
+              <td>YouTube Link</td>
+            </tr>
+            <tr>
+              <td>Something</td>
+              <td>Something</td>
+              <td>Something</td>
+              <td>Something</td>
+              <td>Something</td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
     </div>
     <!-- /.container -->
