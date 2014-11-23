@@ -12,7 +12,11 @@ def db_connection
 end
 
 def song_list
-  []
+  select_query = "SELECT * FROM songs"
+  result = db_connection do |conn|
+    conn.exec(select_query)
+  end
+  result.to_a
 end
 
 def complete?(array)
@@ -39,6 +43,7 @@ end
 
 get '/launcher_dj' do
   @song_list = song_list
+  binding.pry
   erb :index
 end
 
@@ -47,6 +52,7 @@ post '/submission' do
   @artist = params[:artist]
   @url = params[:url]
   @username = params[:username]
-  @message = add_song_to_db(@title, @artist, @url, @username)
+  @message = add_song_to_db(@title, @artist, @username, @url)
+  @song_list = song_list
   erb :index
 end
