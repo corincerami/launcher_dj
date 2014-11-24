@@ -12,7 +12,7 @@ def db_connection
 end
 
 def song_list
-  select_query = "SELECT * FROM songs"
+  select_query = 'SELECT * FROM songs'
   result = db_connection do |conn|
     conn.exec(select_query)
   end
@@ -26,16 +26,13 @@ def complete?(array)
   true
 end
 
-def sanitize(song_name, artist, user_name, url)
-  [song_name, artist, user_name, url]
-end
-
 def add_song_to_db(song_name, artist, user_name, url)
-  return 'Please fill out all fields' unless complete?([song_name, artist, user_name, url])
-  song_data = sanitize(song_name, artist, user_name, url)
-  query = "INSERT INTO songs (song_name, artist, user_name, song_url, created_at)
-    VALUES ('#{song_data[0]}', '#{song_data[1]}', '#{song_data[2]}', '#{song_data[3]}', now());"
+  @song_data = [song_name, artist, user_name, url]
+  return 'Please fill out all fields' unless complete?(@song_data)
   db_connection do |conn|
+    data = @song_data.map { |item| conn.escape_literal(item) }
+    query = "INSERT INTO songs (song_name, artist, user_name, song_url, created_at)
+      VALUES (#{data[0]}, #{data[1]}, #{data[2]}, #{data[3]}, now());"
     conn.exec(query)
   end
   'Submission accepted'
