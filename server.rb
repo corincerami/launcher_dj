@@ -40,7 +40,6 @@ end
 
 get '/launcher_dj' do
   @song_list = song_list
-  # binding.pry
   erb :index
 end
 
